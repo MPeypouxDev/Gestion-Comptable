@@ -1,0 +1,646 @@
+/* === VARIABLES CSS POUR LES THÈMES === */
+:root {
+    /* Thème Light */
+    --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --bg-secondary: white;
+    --bg-tertiary: #f8f9fa;
+    --text-primary: #2c3e50;
+    --text-secondary: #495057;
+    --text-muted: #6c757d;
+    --border-color: #e9ecef;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow-hover: rgba(0, 0, 0, 0.2);
+    --table-hover: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    --table-even: #fafafa;
+    --input-bg: white;
+}
+
+[data-theme="dark"] {
+    /* Thème Dark */
+    --bg-primary: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #b8b8b8;
+    --text-muted: #888888;
+    --border-color: #404040;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-hover: rgba(0, 0, 0, 0.5);
+    --table-hover: linear-gradient(135deg, #3a3a3a 0%, #4a4a4a 100%);
+    --table-even: #252525;
+    --input-bg: #333333;
+}
+
+/* === SWITCH DE THÈME === */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-secondary);
+    padding: 10px 15px;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow-hover);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    transition: all 0.4s ease;
+    border-radius: 25px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slider:before {
+    position: absolute;
+    content: "🌞";
+    height: 21px;
+    width: 21px;
+    left: 2px;
+    bottom: 2px;
+    background: white;
+    transition: all 0.4s ease;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .slider {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+input:checked + .slider:before {
+    transform: translateX(25px);
+    content: "🌙";
+}
+
+.theme-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9em;
+    user-select: none;
+}
+
+/* === RESET ET BASE === */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-primary);
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    color: white;
+}
+
+/* === CONTAINER PRINCIPAL === */
+#containerApp {
+    width: 800px;
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    margin: 20px auto;
+}
+
+/* === TITRE === */
+.title {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    padding: 30px 20px;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.title h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.title h2 {
+    font-size: 1.2em;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* === TOTAUX FINANCIERS === */
+.totaux-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 20px;
+    background: #f8f9fa;
+}
+
+#revenusTotaux, #depensesTotales, #beneficeNet {
+    width: 600px;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#revenusTotaux:hover, #depensesTotales:hover, #beneficeNet:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+#revenusTotaux {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+}
+
+#depensesTotales {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+#beneficeNet {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+#revenusTotaux h2, #depensesTotales h2, #beneficeNet h2 {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+#montantRevenus, #montantDepenses, #montantBenefices {
+    font-size: 2em;
+    font-weight: 700;
+}
+
+/* === SECTIONS COMMUNES === */
+.formulaire, #objectifsFinanciers, #containerTransactions, #rapportFinancier {
+    background: var(--bg-secondary);
+    margin: 20px;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 5px 15px var(--shadow);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+/* === FORMULAIRES === */
+.formulaire h1, #objectifsFinanciers h1, #containerTransactions h1, #rapportFinancier h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--text-primary);
+    font-size: 1.8em;
+    font-weight: 600;
+}
+
+.formulaire {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formulaire div {
+    width: 600px;
+    max-width: 450px;
+    margin-bottom: 20px;
+}
+
+.formulaire h3, #objectifsFinanciers h3 {
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    font-size: 1em;
+    font-weight: 600;
+}
+
+#description, #montant, #typeFormulaire, #selecteurFormulaire, #formulaireCalendrier,
+#nomObjectif, #montantCible, #calendrierObjectif {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+#description:focus, #montant:focus, #typeFormulaire:focus, #selecteurFormulaire:focus, #formulaireCalendrier:focus,
+#nomObjectif:focus, #montantCible:focus, #calendrierObjectif:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* === BOUTONS === */
+#addButton, #createButton {
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+#addButton:hover, #createButton:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #21618c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* === OBJECTIFS FINANCIERS === */
+#objectifsFinanciers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#objectifsFinanciers div {
+    width: 100%;
+    max-width: 450px;
+    margin-bottom: 20px;
+}
+
+/* === FILTRES === */
+#containerTransactions > div:first-of-type {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#typesTransactions, #catégoriesTransactions, #périodesTransactions {
+    padding: 10px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    background: white;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+#typesTransactions:focus, #catégoriesTransactions:focus, #périodesTransactions:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* === TABLEAU === */
+#tableau {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* === EN-TÊTES DU TABLEAU === */
+thead th {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    padding: 18px 15px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+thead th:first-child {
+    border-top-left-radius: 12px;
+}
+
+thead th:last-child {
+    border-top-right-radius: 12px;
+}
+
+/* === LIGNES DU TABLEAU === */
+tbody tr {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+tbody tr:hover {
+    transform: translateY(-1px);
+    background: var(--table-hover);
+    box-shadow: 0 4px 8px var(--shadow);
+}
+
+tbody tr:nth-child(even) {
+    background: var(--table-even);
+}
+
+tbody tr:nth-child(even):hover {
+    background: var(--table-hover);
+}
+
+/* === CELLULES DU TABLEAU === */
+tbody td {
+    padding: 20px 15px;
+    text-align: center;
+    vertical-align: middle;
+    color: var(--text-primary);
+    font-weight: 500;
+    border: none;
+    font-size: 0.9em;
+}
+
+/* Colonnes spécifiques */
+tbody td:nth-child(1) {
+    font-weight: 600;
+    color: #495057;
+    font-family: 'Courier New', monospace;
+}
+
+tbody td:nth-child(2) {
+    text-align: left;
+    font-weight: 700;
+    color: #2c3e50;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+tbody td:nth-child(3) {
+    font-style: italic;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+tbody td:nth-child(4) {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 0.5px;
+}
+
+/* Badges pour les types */
+tbody td:nth-child(4)[data-type="Revenus"] {
+    color: #155724;
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border-radius: 20px;
+    padding: 8px 16px;
+    border: 1px solid #c3e6cb;
+}
+
+tbody td:nth-child(4)[data-type="Dépenses"] {
+    color: #721c24;
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    border-radius: 20px;
+    padding: 8px 16px;
+    border: 1px solid #f5c6cb;
+}
+
+/* Montants colorés */
+tbody td:nth-child(5) {
+    font-weight: 700;
+    font-size: 1.1em;
+    font-family: 'Courier New', monospace;
+}
+
+tbody tr:has(td:nth-child(4)[data-type="Revenus"]) td:nth-child(5) {
+    color: #28a745;
+}
+
+tbody tr:has(td:nth-child(4)[data-type="Dépenses"]) td:nth-child(5) {
+    color: #dc3545;
+}
+
+/* === BOUTONS DU TABLEAU === */
+tbody td:nth-child(6) button {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(231, 76, 60, 0.3);
+}
+
+tbody td:nth-child(6) button:hover {
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(231, 76, 60, 0.4);
+}
+
+/* === MESSAGE VIDE === */
+tbody tr td[colspan="6"] {
+    padding: 50px 20px;
+    color: #6c757d;
+    font-size: 1.2em;
+    font-style: italic;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* === RAPPORT FINANCIER === */
+#rapportFinancier {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+}
+
+#rapportContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    text-align: center;
+    padding: 25px;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+#moyenneMensuelle, #maxDepense, #maxRevenu, #tauxEpargne {
+    background: var(--bg-secondary);
+    box-shadow: 0 4px 6px var(--shadow);
+    border: none;
+    border-radius: 12px;
+    padding: 25px 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#moyenneMensuelle:hover, #maxDepense:hover, #maxRevenu:hover, #tauxEpargne:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+#rapportContainer h3 {
+    color: var(--text-primary);
+    font-size: 1em;
+    margin-bottom: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#rapportContainer div > div {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #3498db;
+    font-family: 'Courier New', monospace;
+}
+
+/* === RESPONSIVITÉ === */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    #containerApp {
+        width: 100%;
+        margin: 10px;
+    }
+    
+    .title h1 {
+        font-size: 2em;
+    }
+    
+    .title h2 {
+        font-size: 1em;
+    }
+    
+    .formulaire, #objectifsFinanciers, #containerTransactions, #rapportFinancier {
+        margin: 15px 10px;
+        padding: 20px 15px;
+    }
+    
+    .totaux-container {
+        grid-template-columns: 1fr;
+        padding: 20px 15px;
+    }
+    
+    #containerTransactions > div:first-of-type {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    @media (max-width: 768px) {
+    .theme-toggle {
+        top: 15px;
+        right: 15px;
+        padding: 8px 12px;
+    }
+    
+    .theme-label {
+        display: none;
+    }
+}
+    
+    table {
+        min-width: 600px;
+    }
+    
+    thead th, tbody td {
+        padding: 12px 8px;
+        font-size: 0.8em;
+    }
+    
+    tbody td:nth-child(2) {
+        max-width: 120px;
+    }
+    
+    #rapportContainer {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        padding: 20px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        padding: 20px 15px;
+    }
+    
+    .title h1 {
+        font-size: 1.8em;
+    }
+    
+    .formulaire div, #objectifsFinanciers div {
+        max-width: 100%;
+    }
+    
+    #rapportContainer {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .switch {
+        width: 40px;
+        height: 20px;
+    }
+    
+    .slider:before {
+        height: 16px;
+        width: 16px;
+        font-size: 10px;
+    }
+    
+    input:checked + .slider:before {
+        transform: translateX(20px);
+    }
+}

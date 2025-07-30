@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Gestion Comptable</title>
+  </head>
+  <body>
+    <div class="theme-toggle">
+      <span class="theme-label">Light</span>
+      <label class="switch">
+        <input type="checkbox" id="theme-switch" />
+        <span class="slider"></span>
+      </label>
+      <span class="theme-label">Dark</span>
+    </div>
+    <div id="containerApp">
+      <div class="title">
+        <h1>Gestion Comptable</h1>
+        <h2>Tableau de bord financier personnel</h2>
+      </div>
+
+      <div class="totaux-container">
+        <div id="revenusTotaux">
+          <h2>Revenus Totaux</h2>
+          <div id="montantRevenus">0.00€</div>
+        </div>
+        <div id="depensesTotales">
+          <h2>Dépenses Totales</h2>
+          <div id="montantDepenses">0.00€</div>
+        </div>
+        <div id="beneficeNet">
+          <h2>Bénéfice Net</h2>
+          <div id="montantBenefices">0.00€</div>
+        </div>
+      </div>
+      <div class="formulaire">
+        <h1>Ajouter une Transaction</h1>
+        <form id="transactionFormulaire">
+          <div>
+            <h3>Description</h3>
+            <input
+              type="text"
+              placeholder="Ex: Salaire,Loyer,Restaurant..."
+              id="description"
+            />
+          </div>
+          <div>
+            <h3>Montant (€)</h3>
+            <input type="number" placeholder="0" id="montant" />
+          </div>
+          <div>
+            <h3>Type</h3>
+            <select id="typeFormulaire">
+              <option value="Sélectionner">Sélectionner...</option>
+              <option value="Revenus">Revenus</option>
+              <option value="Dépenses">Dépenses</option>
+            </select>
+          </div>
+          <div>
+            <h3>Catégorie</h3>
+            <select id="selecteurFormulaire">
+              <option value="Factures">Factures</option>
+              <option value="Loisirs">Loisirs</option>
+              <option value="Automobile">Automobile</option>
+              <option value="Dépenses diverses">Dépenses diverses</option>
+              <option value="Salaire">Salaire</option>
+            </select>
+          </div>
+          <div>
+            <h3>Date</h3>
+            <input type="date" id="formulaireCalendrier" />
+          </div>
+        </form>
+        <button id="addButton" type="button">Ajouter Transaction</button>
+      </div>
+      <div id="containerTransactions">
+        <h1>Historique des transactions</h1>
+        <div>
+          <select id="typesTransactions">
+            <option value="Tous les types">Tous les types</option>
+            <option value="Revenus">Revenus</option>
+            <option value="Dépenses">Dépenses</option>
+          </select>
+          <select id="catégoriesTransactions">
+            <option value="Factures">Factures</option>
+            <option value="Loisirs">Loisirs</option>
+            <option value="Automobile">Automobile</option>
+            <option value="Dépenses diverses">Dépenses diverses</option>
+          </select>
+          <select id="périodesTransactions">
+            <option value="Toutes périodes">Toutes périodes</option>
+            <option value="7 derniers jours">7 derniers jours</option>
+            <option value="30 derniers jours">30 derniers jours</option>
+            <option value="3 derniers mois">3 derniers mois</option>
+          </select>
+        </div>
+        <div id="tableau">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Catégorie</th>
+                <th>Type</th>
+                <th>Montant</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="transactionsTable"></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="objectifsFinanciers">
+        <h1>Objectifs Financiers</h1>
+        <div>
+          <h3>Nom de l'objectif</h3>
+          <input
+            type="text"
+            placeholder="Ex: Epargne vacances"
+            id="nomObjectif"
+          />
+        </div>
+        <div>
+          <h3>Montant cible (€)</h3>
+          <input type="number" placeholder="0.00" id="montantCible" />
+        </div>
+        <div>
+          <h3>Date limite</h3>
+          <input type="date" id="calendrierObjectif" />
+        </div>
+        <button type="button" onclick="createGoal()" id="createButton">
+          Créer Objectif
+        </button>
+      </div>
+      <div id="rapportFinancier">
+        <h1>Rapport Financier</h1>
+        <div id="rapportContainer">
+          <div>
+            <h3>Moyenne Mensuelle</h3>
+            <div id="moyenneMensuelle">0.00€</div>
+          </div>
+          <div>
+            <h3>Plus Grosse Dépense</h3>
+            <div id="maxDepense">0.00€</div>
+          </div>
+          <div>
+            <h3>Plus Gros Revenu</h3>
+            <div id="maxRevenu">0.00€</div>
+          </div>
+          <div>
+            <h3>Taux d'épargne</h3>
+            <div id="tauxEpargne">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
