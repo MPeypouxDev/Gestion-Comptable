@@ -1,3 +1,5 @@
+![Aperçu de l'application](/assets/gestioncomptable-aperçu.png)
+
 Application de Gestion Comptable
 Une application web moderne de gestion comptable personnelle permettant de suivre vos revenus, dépenses et objectifs financiers avec une interface élégante et responsive.
 🌟 Fonctionnalités
